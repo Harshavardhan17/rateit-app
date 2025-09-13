@@ -1,9 +1,14 @@
 import React from 'react';
 import './App.css';
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <h1>Welcome to Rateit</h1>
+      <div>
+        <h1>Welcome to Rateit</h1>
+        <HomePage/>
+      </div>
+
   );
 }
 
