@@ -50,7 +50,11 @@ function HomePage() {
     const handleEdit = (review) => {
         setEditingReview(review);
         setShowForm(true);
-    }
+    };
+
+    const handleDelete = (id) => {
+       setReviews(prevState => prevState.filter(review => review.id !== id));
+    };
 
 
     return (
@@ -62,7 +66,7 @@ function HomePage() {
 
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {reviews.map(review => (
-                    <ReviewCard key={review.id} review={review} onEdit={handleEdit}/>
+                    <ReviewCard key={review.id} review={review} onEdit={handleEdit} onDelete={handleDelete}/>
                 ))}
             </div>
 

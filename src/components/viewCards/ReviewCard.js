@@ -3,7 +3,7 @@ import './ReviewCard.css';
 import StarIcon from "./StarIcon";
 import PropTypes from "prop-types";
 
-function ReviewCard({review, onEdit}) {
+function ReviewCard({review, onEdit, onDelete}) {
 
     const stars = Array.from(
         {length: 5}, (_, i) => (
@@ -18,6 +18,7 @@ function ReviewCard({review, onEdit}) {
             <div className="review-rating">{stars}</div>
             <div className="review-actions">
                 <button onClick={() => onEdit(review)}>Edit</button>
+                <button onClick={() => onDelete(review.id)}>Delete</button>
             </div>
         </div>
     );
@@ -25,7 +26,8 @@ function ReviewCard({review, onEdit}) {
 
 ReviewCard.propTypes = {
     review: PropTypes.string,
-    onEdit: PropTypes.bool
+    onEdit: PropTypes.bool,
+    onDelete: PropTypes.bool,
 };
 
 
