@@ -8,28 +8,49 @@ function HomePage() {
     const [reviews, setReviews] = useState([])
     const [showForm, setShowForm] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [editingReview, setEditingReview] = useState(null);
 
-
-    const handleAddReview = async (data) => {
+    const handleSubmit = async (data) => {
         setLoading(true);
         try {
-            const response = await seriesApi.createSeries({ name: data.title, rating: data.rating });
-            if (response.success) {
-                const newReview = {
-                    id: response.data.id,
-                    title: response.data.name,
+            if (editingReview) {
+                const updatedReview = {
+                    ...editingReview,
+                    title: data.title,
                     description: data.description,
-                    rating: response.data.rating
+                    rating: data.rating
                 };
-                setReviews(prev => [...prev, newReview]);
+                setReviews(prev =>
+                    prev.map(r => (r.id === updatedReview.id ? updatedReview : r))
+                );
+            } else {
+                const response = await seriesApi.createSeries({
+                    name: data.title,
+                    rating: data.rating
+                });
+                if (response.success) {
+                    const newReview = {
+                        id: response.data.id,
+                        title: response.data.name,
+                        description: data.description,
+                        rating: response.data.rating
+                    };
+                    setReviews(prev => [...prev, newReview]);
+                }
             }
         } catch (error) {
-            console.error('Failed to add review:', error);
+            console.error('Failed to save review:', error);
         } finally {
             setLoading(false);
             setShowForm(false);
+            setEditingReview(null);
         }
     };
+
+    const handleEdit = (review) => {
+        setEditingReview(review);
+        setShowForm(true);
+    }
 
 
     return (
@@ -39,16 +60,20 @@ function HomePage() {
 
             {loading && <p>Adding review...</p>}
 
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {reviews.map(review => (
-                    <ReviewCard key={review.id} review={review}/>
+                    <ReviewCard key={review.id} review={review} onEdit={handleEdit}/>
                 ))}
             </div>
 
             <ReviewForm
                 isOpen={showForm}
-                onClose={() => setShowForm(false)}
-                onSubmit={handleAddReview}
+                onClose={() => {
+                    setShowForm(false)
+                    setEditingReview(null)
+                }}
+                onSubmit={handleSubmit}
+                initialData={editingReview}
             />
 
         </div>

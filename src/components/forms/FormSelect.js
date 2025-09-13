@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FormSelect({ label, value, onChange }) {
+function FormSelect({label, value, onChange}) {
     return (
         <div className="form-group">
             <label>{label}:</label>
