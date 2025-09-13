@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 function FormInput({ label, value, onChange }) {
     return (
@@ -14,5 +15,12 @@ function FormInput({ label, value, onChange }) {
         </div>
     );
 }
+
+FormInput.propTypes = {
+    label: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+};
+
 
 export default FormInput;

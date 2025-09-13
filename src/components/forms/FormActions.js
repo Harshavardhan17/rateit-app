@@ -1,12 +1,16 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
-function FormActions({ onCancel, onSubmit }) {
+function FormActions({ onSubmit }) {
     return (
         <div className="form-actions">
-            <button onClick={onCancel}>Cancel</button>
             <button onClick={onSubmit}>Save</button>
         </div>
     );
 }
+
+FormActions.propTypes = {
+    onSubmit: PropTypes.bool,
+};
 
 export default FormActions;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 function FormSelect({label, value, onChange}) {
     return (
@@ -14,5 +15,12 @@ function FormSelect({label, value, onChange}) {
         </div>
     );
 }
+
+FormSelect.propTypes = {
+    label: PropTypes.string,
+    value: PropTypes.number,
+    onChange: PropTypes.func,
+};
+
 
 export default FormSelect;

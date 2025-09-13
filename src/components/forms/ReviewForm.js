@@ -3,6 +3,9 @@ import FormInput from "./FormInput";
 import FormTextarea from "./FormArea";
 import FormSelect from "./FormSelect";
 import FormActions from "./FormActions";
+import CloseButton from "./CloseButton";
+import PropTypes from "prop-types";
+import './ReviewForm.css';
 
 function ReviewForm({isOpen, onClose, onSubmit, initialData}) {
 
@@ -35,7 +38,10 @@ function ReviewForm({isOpen, onClose, onSubmit, initialData}) {
     return (
         <div className="modal">
             <div className="modal-content">
-                <h3>{initialData ? 'Edit Review' : 'Add New Review'}</h3>
+                <div className="modal-header">
+                    <h3 className="modal-title">{initialData ? 'Edit Review' : 'Add New Review'}</h3>
+                    <CloseButton onClick={onClose} />
+                </div>
                 <FormInput label="Title" value={title} onChange={setTitle}/>
                 <FormTextarea label="Description" value={description} onChange={setDescription}/>
                 <FormSelect label="Rating" value={rating} onChange={setRating}/>
@@ -45,5 +51,12 @@ function ReviewForm({isOpen, onClose, onSubmit, initialData}) {
         </div>
     );
 }
+
+ReviewForm.propTypes = {
+    isOpen: PropTypes.bool,
+    onClose: PropTypes.func,
+    onSubmit: PropTypes.func,
+    initialData: PropTypes.object,
+};
 
 export default ReviewForm;

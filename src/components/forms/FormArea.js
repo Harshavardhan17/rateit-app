@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 function FormTextarea({ label, value, onChange }) {
     return (
@@ -13,5 +14,11 @@ function FormTextarea({ label, value, onChange }) {
         </div>
     );
 }
+
+FormTextarea.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
 
 export default FormTextarea;

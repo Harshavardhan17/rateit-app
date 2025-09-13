@@ -1,6 +1,7 @@
 import React from 'react';
 import './ReviewCard.css';
 import StarIcon from "./StarIcon";
+import PropTypes from "prop-types";
 
 function ReviewCard({review, onEdit}) {
 
@@ -21,5 +22,11 @@ function ReviewCard({review, onEdit}) {
         </div>
     );
 }
+
+ReviewCard.propTypes = {
+    review: PropTypes.string,
+    onEdit: PropTypes.bool
+};
+
 
 export default ReviewCard;
