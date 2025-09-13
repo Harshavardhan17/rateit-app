@@ -1,14 +1,20 @@
 import React from 'react';
 import './ReviewCard.css';
+import StarIcon from "./StarIcon";
 
 function ReviewCard({ review }) {
+
+    const stars = Array.from(
+        {length: 5}, (_, i) => (
+            <StarIcon key={i} filled={i < Number(review.rating)} />
+        )
+    );
+
     return (
         <div className="review-card">
             <h3 className="review-title">{review.title}</h3>
             <p className="review-description">{review.description}</p>
-            <p className="review-rating">
-                {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
-            </p>
+            <div className="review-rating">{stars}</div>
         </div>
     );
 }
